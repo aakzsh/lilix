@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "226166119843",
+    "firebase_url": "https://lilixcutieyay-default-rtdb.firebaseio.com",
+    "project_id": "lilixcutieyay",
+    "storage_bucket": "lilixcutieyay.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226166119843:android:0d7d9c27f231bc32eece16",
+        "android_client_info": {
+          "package_name": "com.example.lilix"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226166119843-lb241hnj8ee262nfdfl4ee5oqtln4gor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5IWQpSUvrs0_ahPfe_Cd73N0TcynNKlM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226166119843-lb241hnj8ee262nfdfl4ee5oqtln4gor.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

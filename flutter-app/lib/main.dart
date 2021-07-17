@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lilix/home.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:lilix/signup.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -75,8 +80,10 @@ class _MainPageState extends State<MainPage> {
                       ),
                       minWidth: 120,
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Home()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Checking()));
                       },
                       child: Text("Let's Start",
                           style:
@@ -88,5 +95,25 @@ class _MainPageState extends State<MainPage> {
             ],
           )),
     );
+  }
+}
+
+class Checking extends StatefulWidget {
+  @override
+  _CheckingState createState() => _CheckingState();
+}
+
+class _CheckingState extends State<Checking> {
+  @override
+  Widget build(BuildContext context) {
+    check() {
+      if (FirebaseAuth.instance.currentUser != null) {
+        return Home();
+      } else {
+        return Signup();
+      }
+    }
+
+    return check();
   }
 }
