@@ -18,7 +18,7 @@ class _SignupState extends State<Signup> {
   @override
   Widget build(BuildContext context) {
     String name, email, password;
-    bool flag = true;
+
     int steps = 0, goal = 0;
     return Scaffold(
         body: Container(
@@ -136,7 +136,6 @@ class _SignupState extends State<Signup> {
                           .doc(value.user?.uid)
                           .set({
                         "name": name,
-                        "flag": flag,
                         "email": email,
                         "steps": steps,
                         "goal": goal,
