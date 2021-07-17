@@ -3,6 +3,8 @@ import 'package:lilix/encrypt.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lilix/main.dart';
 import 'package:pedometer/pedometer.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -10,10 +12,12 @@ class Dashboard extends StatefulWidget {
 }
 
 int steps;
-int goal = 0;
+int goal = 200;
 double percent = 0.0;
 
 class _DashboardState extends State<Dashboard> {
+  final User user = FirebaseAuth.instance.currentUser;
+
   Stream<StepCount> _stepCountStream;
   String _steps = '?';
 
@@ -46,6 +50,12 @@ class _DashboardState extends State<Dashboard> {
 
   @override
   Widget build(BuildContext context) {
+    final uid = user.uid;
+    // setState(() {
+    //   if (goal != 0) {
+    //     percent = (steps / goal) * 100;
+    //   }
+    // });
     return Scaffold(
       body: Container(
         color: bluesy,
@@ -102,7 +112,7 @@ class _DashboardState extends State<Dashboard> {
                 Column(
                   children: <Widget>[
                     Text(
-                      "Level of Encryption",
+                      "Steps",
                       style: GoogleFonts.poppins(
                           color: Colors.white, fontSize: 15),
                     ),
@@ -152,6 +162,15 @@ class _DashboardState extends State<Dashboard> {
                   ],
                 ),
               ],
+            ),
+            MaterialButton(
+              onPressed: () {
+                FirebaseFirestore.instance
+                    .collection('users')
+                    .doc('$uid')
+                    .update({'steps': '${int.parse(_steps)}'});
+              },
+              child: Text("Update"),
             )
           ],
         ),
