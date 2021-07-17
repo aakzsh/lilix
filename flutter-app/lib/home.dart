@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lilix/dashboard.dart';
 import 'package:lilix/encrypt.dart';
+import 'package:lilix/pedometer.dart';
 import 'main.dart';
 
 class Home extends StatefulWidget {
