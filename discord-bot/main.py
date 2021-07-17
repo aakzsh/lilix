@@ -24,9 +24,64 @@ firestore_db = firestore.client()
 
 bot = commands.Bot(command_prefix="!")
 
+#decrypt
+def decrypt(msg):
+  levels = int(msg[0])
+  p = msg[1:].split("^")
+  q = p[0]
+  r = p[1]
+  print(levels, p, q, r)
+  for i in range(levels):
+    dectitle = base64.b64decode(q).decode('utf-8')
+    decbody = base64.b64decode(r).decode('utf-8')
+    q = dectitle
+    r = decbody
+  
+  return dectitle, decbody
+
+
 @bot.command()  
 async def hey(ctx):
   await ctx.send("lol") 
+
+
+@bot.command()  
+async def retrieve(ctx):
+  author = str(ctx.message.author.id)
+  
+  #retrieve firebase message
+  output_ref = firestore_db.collection("messages").document(author)
+  output = output_ref.get()
+
+  retrieved_message =  output.to_dict()
+  curr = retrieved_message["counter"]
+  remainingSteps = int(retrieved_message["remainingSteps"])
+  length = len(retrieved_message["messages"])
+  
+  
+
+  if remainingSteps > 100 and curr < length:
+    curr_message = retrieved_message["messages"][curr]["text"]
+    print(curr_message)
+    secrett, secretb = decrypt(curr_message)
+    await ctx.send(f"{secrett} {secretb}")
+    remainingSteps -= 100
+    curr += 1
+    output_ref.update({
+      "remainingSteps": remainingSteps,
+      "counter": curr
+    })
+  elif remainingSteps < 100 and curr < length:
+    rem = 100 - remainingSteps
+    await ctx.send(f"Sorry, you cannot view the message yet. To be able to access this message, you need to complete {rem} more steps")
+  elif curr >= length:
+    await ctx.send("You dont have new messages")
+  #update
+  
+
+   
+
+
 
 
 @bot.command()
