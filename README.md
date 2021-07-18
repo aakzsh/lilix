@@ -18,4 +18,4 @@ Additionally, you'll need to create your own Firebase Firestore DB, the referenc
 
 
 # Demo Video
-https://youtu.be/9jrKZgLXMig
+https://www.youtube.com/watch?v=OraiFdCDo68&t=1s
